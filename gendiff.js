@@ -1,0 +1,14 @@
+#!/usr/bin/env node
+
+import { Command } from 'commander/esm.mjs';
+const program = new Command();
+
+console.log('Hello, cruel World!');
+
+program
+  .description('Compares two configuration files and shows a difference.')
+  .version('1.0.0')
+  .option('-f, --format [type]', 'output format');
+  //.option('-h, --help', 'output usage information');
+
+program.parse(process.argv);
