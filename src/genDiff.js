@@ -1,8 +1,14 @@
 import _ from 'lodash';
+import { readFileSync } from 'fs';
+
+const getJson = (pathString) => {
+  const result = readFileSync(pathString);
+  return JSON.parse(result);
+}
 
 const genDiff = (json1, json2) => {
   const jsonKeys1 = Object.keys(json1).sort();
-  const jsonKeys2 = Object.keys(json2).sort();
+  //const jsonKeys2 = Object.keys(json2).sort();
   let result;
   if (_.isEqual(json1, json2)) {
     result = jsonKeys1.reduce((acc, key) => {
@@ -20,4 +26,7 @@ const genDiff = (json1, json2) => {
 
 
 
-export { genDiff };
+export {
+  genDiff,
+  getJson
+};
