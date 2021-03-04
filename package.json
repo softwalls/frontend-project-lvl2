@@ -5,7 +5,7 @@
   "description": "frontend-project-lvl2",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
   },
   "bin": {
     "gendiff": "./gendiff.js"
@@ -21,7 +21,8 @@
   },
   "homepage": "https://github.com/softwalls/frontend-project-lvl2#readme",
   "dependencies": {
-    "commander": "^7.1.0"
+    "commander": "^7.1.0",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "jest": "^26.6.3"
