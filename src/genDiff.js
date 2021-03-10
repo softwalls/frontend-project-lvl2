@@ -1,10 +1,11 @@
 import _ from 'lodash';
 import { readFileSync } from 'fs';
-import { fileURLToPath, pathToFileURL } from 'url';
-import { dirname } from 'path';
-import path from 'path';
+import { fileURLToPath } from 'url';
+import path, { dirname } from 'path';
 
+// eslint-disable-next-line no-underscore-dangle
 const __filename = fileURLToPath(import.meta.url);
+// eslint-disable-next-line no-underscore-dangle
 const __dirname = dirname(__filename);
 
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
@@ -37,11 +38,12 @@ const genDiff = (json1, json2) => {
         // свойство исчезло - генерится строка с -
         if (_.has(json1, prop)) {
           acc.push(`  - ${prop}: ${json1[prop]}`);
-        } else {
-          // свойство появилось - генерится строка с +
-        acc.push(`  + ${prop}: ${json2[prop]}`);
         }
-      };
+        if (_.has(json2, prop)) {
+          // свойство появилось - генерится строка с +
+          acc.push(`  + ${prop}: ${json2[prop]}`);
+        }
+      }
       return acc;
     }, []);
     return result;

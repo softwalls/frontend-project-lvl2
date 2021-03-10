@@ -12,8 +12,7 @@
 
 */
 import { readFileSync } from 'fs';
-import { genDiff, getJson } from '../src/genDiff.js';
-
+import { genDiff, getJson } from '../src/genDiff';
 
 // исходники для тестов
 
