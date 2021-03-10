@@ -1,9 +1,18 @@
 import _ from 'lodash';
 import { readFileSync } from 'fs';
+import { fileURLToPath, pathToFileURL } from 'url';
+import { dirname } from 'path';
+import path from 'path';
 
-const getJson = (pathString) => {
-  const result = readFileSync(pathString);
-  return JSON.parse(result);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
+
+const getJson = (filename) => {
+  const rawJson = readFileSync(getFixturePath(`${filename}`));
+  const result = JSON.parse(rawJson);
+  return result;
 };
 
 const genDiff = (json1, json2) => {
@@ -29,11 +38,10 @@ const genDiff = (json1, json2) => {
         if (_.has(json1, prop)) {
           acc.push(`  - ${prop}: ${json1[prop]}`);
         } else {
-        // свойство появилось - генерится строка с +
-          acc.push(`  + ${prop}: ${json2[prop]}`);
+          // свойство появилось - генерится строка с +
+        acc.push(`  + ${prop}: ${json2[prop]}`);
         }
-      }
-
+      };
       return acc;
     }, []);
     return result;

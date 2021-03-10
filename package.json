@@ -5,7 +5,7 @@
   "description": "frontend-project-lvl2",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest --watch"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "bin": {
     "gendiff": "./gendiff.js"
@@ -23,6 +23,10 @@
   "dependencies": {
     "commander": "^7.1.0",
     "lodash": "^4.17.21"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {}
   },
   "devDependencies": {
     "eslint": "^7.21.0",
