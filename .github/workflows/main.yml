@@ -3,7 +3,7 @@ name: test_and_lint
 on: push
 
 jobs:
-  example-job:
+  test:
     runs-on: ubuntu-latest
     steps:
       
@@ -11,17 +11,11 @@ jobs:
       - uses: actions/setup-node@v1
       - run: npm install
       - run: npm install --save-dev jest
-      - run: npm test
+      - run: npx jest
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
       - run: make lint
-© 2021 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
