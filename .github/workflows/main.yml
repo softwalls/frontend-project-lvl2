@@ -11,7 +11,7 @@ jobs:
       - uses: actions/setup-node@v1
       - run: npm install
       - run: npm install --save-dev jest
-      - run: npm test
+      - run: NODE_OPTIONS=--experimental-vm-modules npx jest
   lint:
     runs-on: ubuntu-latest
     steps:
