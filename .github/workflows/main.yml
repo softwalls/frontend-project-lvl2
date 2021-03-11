@@ -21,8 +21,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           
-      - run: npm install
-      - run: npm install --save-dev jest jest-ci
+      - name: npm install
+        # Install project
+        run: |
+          make install
       - run: NODE_OPTIONS=--experimental-vm-modules npx jest-ci
   lint:
     runs-on: ubuntu-latest
