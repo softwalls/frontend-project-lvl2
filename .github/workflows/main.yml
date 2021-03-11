@@ -23,8 +23,7 @@ jobs:
           
       - name: npm install
         # Install project
-        run: |
-          make install
+        run:  make install
        - name: Test & publish code coverage
         # Publish code coverage on Code Climate
         # https://github.com/paambaati/codeclimate-action
