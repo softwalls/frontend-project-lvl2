@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import { genDiff, getJson } from './src/genDiff';
+import { genDiff, getJson } from './../src/genDiff.js';
 
 const program = new Command();
 

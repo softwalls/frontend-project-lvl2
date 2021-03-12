@@ -8,7 +8,7 @@
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "bin": {
-    "gendiff": "./gendiff.js"
+    "gendiff": "./bin/gendiff.js"
   },
   "repository": {
     "type": "git",
