@@ -1,11 +1,11 @@
 /* eslint-disable no-undef */
 
 import { readFileSync } from 'fs';
-import { genDiff, getJson } from '../src/genDiff';
+import { genDiff } from '../src/genDiff';
 
 // исходники для тестов
 
-const path1 = './__fixtures__/diff';
+const pathDiff = './__fixtures__/diff';
 // const path2 = '/Users/softwalls/JS_Projects/frontend-project-lvl2/src/file2.json';
 // const file1 = readFileSync(path1);
 // const file2 = readFileSync(path2);
@@ -16,16 +16,28 @@ const path1 = './__fixtures__/diff';
 //     expect(getJson(path1)).not.toStrictEqual(json2);
 //   });
 // });
-let filepath1;
-let filepath2;
+let jsonPath1;
+let jsonPath2;
+let yamlPath1;
+let yamlPath2;
 
 describe('genDiff', () => {
   beforeEach(() => {
-    filepath1 = 'file1.json';
-    filepath2 = 'file2.json';
+    jsonPath1 = './__fixtures__/file1.json';
+    jsonPath2 = '/Users/softwalls/JS_Projects/frontend-project-lvl2/__fixtures__/file2.json';
+    yamlPath1 = './__fixtures__/file1.yml';
+    yamlPath2 = '/Users/softwalls/JS_Projects/frontend-project-lvl2/__fixtures__/file2.yml';
   });
 
-  test('some deleted, added and remained same props', () => {
-    expect(genDiff(filepath1, filepath2)).toStrictEqual(`${readFileSync(path1)}`);
+  test('works fine with JSON files', () => {
+    expect(genDiff(jsonPath1, jsonPath2)).toStrictEqual(`${readFileSync(pathDiff)}`);
+  });
+
+  test('works with YAML files', () => {
+    expect(genDiff(yamlPath1, yamlPath2)).toStrictEqual(`${readFileSync(pathDiff)}`);
+  });
+
+  test('works with different type of files', () => {
+    expect(genDiff(jsonPath1, yamlPath2)).toStrictEqual(`${readFileSync(pathDiff)}`);
   });
 });
