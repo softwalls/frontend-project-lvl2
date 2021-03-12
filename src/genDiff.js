@@ -2,6 +2,7 @@ import _ from 'lodash';
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
+import { parseFile } from './parsers.js';
 
 // eslint-disable-next-line no-underscore-dangle
 const __filename = fileURLToPath(import.meta.url);
@@ -10,38 +11,46 @@ const __dirname = dirname(__filename);
 
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 
-const getJson = (filename) => {
-  const rawJson = readFileSync(getFixturePath(`${filename}`));
+const getJson = (filepath) => {
+  const rawJson = readFileSync(getFixturePath(`${filepath}`));
   const result = JSON.parse(rawJson);
   return result;
 };
 
-const genDiff = (json1, json2) => {
+const genDiff = (filepath1, filepath2) => {
+  const getAbcoluteFilePath = (somePath) => path.resolve(process.cwd(), somePath);
+  // прочитаем файлы
+
+  const file1 = parseFile(getAbcoluteFilePath(filepath1));
+  const file2 = parseFile(getAbcoluteFilePath(filepath2));
+
+  // получим свойства для проверки смержив два объекта
+
   const getPropsToCheck = () => {
     const resultObj = {};
-    Object.assign(resultObj, json1, json2);
+    Object.assign(resultObj, file1, file2);
     return Object.keys(resultObj).sort();
   };
-
+  //  здесь мы каждому полю формируем строку
   const generateLineCollection = (props) => {
     const result = props.reduce((acc, prop) => {
-      if (_.has(json1, prop) && _.has(json2, prop)) {
+      if (_.has(file1, prop) && _.has(file2, prop)) {
         // свойство не изменилось - генерится одна строка
-        if (json1[prop] === json2[prop]) {
-          acc.push(`    ${prop}: ${json1[prop]}`);
+        if (file1[prop] === file2[prop]) {
+          acc.push(`    ${prop}: ${file1[prop]}`);
         } else {
           // свойство именилось - генерим две строки(- и +)
 
-          acc.push(`  - ${prop}: ${json1[prop]}`, `  + ${prop}: ${json2[prop]}`);
+          acc.push(`  - ${prop}: ${file1[prop]}`, `  + ${prop}: ${file2[prop]}`);
         }
       } else {
         // свойство исчезло - генерится строка с -
-        if (_.has(json1, prop)) {
-          acc.push(`  - ${prop}: ${json1[prop]}`);
+        if (_.has(file1, prop)) {
+          acc.push(`  - ${prop}: ${file1[prop]}`);
         }
-        if (_.has(json2, prop)) {
+        if (_.has(file2, prop)) {
           // свойство появилось - генерится строка с +
-          acc.push(`  + ${prop}: ${json2[prop]}`);
+          acc.push(`  + ${prop}: ${file2[prop]}`);
         }
       }
       return acc;
@@ -63,10 +72,3 @@ export {
   genDiff,
   getJson,
 };
-
-// genDiff(file1, file2)
-//   - проверка расширения файлов
-//   - для каждого формата - своя функция, 
-//       которая принимает файл, парсит, отдаёт отсортированный 
-//       в алфавитном порядке (по key) массив [[key, value], [...]].
-//   - функция getDiffFromArrs(arr1, arr2) которая и отдаёт строку.

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import { genDiff, getJson } from './../src/genDiff.js';
+import { genDiff } from '../src/genDiff.js';
 
 const program = new Command();
 
@@ -11,6 +11,6 @@ program
   .arguments('<filepath1> <filepath2>')
   .option('-f, --format [type]', 'output format')
   .action((filepath1, filepath2) => console // eslint-disable-line no-console
-    .log(genDiff(getJson(filepath1), getJson(filepath2))));
+    .log(genDiff(filepath1, filepath2)));
 
 program.parse(process.argv);

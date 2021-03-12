@@ -22,6 +22,7 @@
   "homepage": "https://github.com/softwalls/frontend-project-lvl2#readme",
   "dependencies": {
     "commander": "^7.1.0",
+    "js-yaml": "^3.14.1",
     "lodash": "^4.17.21"
   },
   "jest": {
