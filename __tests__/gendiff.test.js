@@ -16,9 +16,16 @@ const path1 = './__fixtures__/diff';
 //     expect(getJson(path1)).not.toStrictEqual(json2);
 //   });
 // });
+let filepath1;
+let filepath2;
 
 describe('genDiff', () => {
+  beforeEach(() => {
+    filepath1 = 'file1.json';
+    filepath2 = 'file2.json';
+  });
+
   test('some deleted, added and remained same props', () => {
-    expect(genDiff(getJson('file1.json'), getJson('file2.json'))).toStrictEqual(`${readFileSync(path1)}`);
+    expect(genDiff(filepath1, filepath2)).toStrictEqual(`${readFileSync(path1)}`);
   });
 });
