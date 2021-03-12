@@ -62,6 +62,7 @@ describe('genDiff', () => {
   test('works with tree-like YAML files', () => {
     expect(genDiff(treeYamlPath1, treeYamlPath2)).toStrictEqual(`${readFileSync(pathTreeDiff)}`);
   });
+
   test('works with different type of tree-like files', () => {
     expect(genDiff(treeJsonPath1, treeYamlPath2)).toStrictEqual(`${readFileSync(pathTreeDiff)}`);
   });
