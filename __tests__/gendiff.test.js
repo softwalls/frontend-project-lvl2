@@ -24,9 +24,9 @@ let yamlPath2;
 describe('genDiff', () => {
   beforeEach(() => {
     jsonPath1 = './__fixtures__/file1.json';
-    jsonPath2 = '/Users/softwalls/JS_Projects/frontend-project-lvl2/__fixtures__/file2.json';
+    jsonPath2 = './__fixtures__/file2.json';
     yamlPath1 = './__fixtures__/file1.yml';
-    yamlPath2 = '/Users/softwalls/JS_Projects/frontend-project-lvl2/__fixtures__/file2.yml';
+    yamlPath2 = './__fixtures__/file2.yml';
   });
 
   test('works fine with JSON files', () => {
