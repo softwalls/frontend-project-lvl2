@@ -18,15 +18,22 @@ const getJson = (filepath) => {
   return result;
 };
 
-const genDiff = (filepath1, filepath2) => {
+// ======================= GENDIFF =================================================
+
+const genDiff = (filepath1, filepath2, formatname) => {
   const getAbcoluteFilePath = (somePath) => path.resolve(process.cwd(), somePath);
   // прочитаем файлы
 
   const file1 = parseFile(getAbcoluteFilePath(filepath1));
   const file2 = parseFile(getAbcoluteFilePath(filepath2));
   const diff = buildAst(file1, file2);
-  return stylish(diff);
+  if (formatname === 'tree') {
+    return stylish(diff);
+  }
+  return diff;
 };
+
+// =================================================================================
 
 export {
   genDiff,
