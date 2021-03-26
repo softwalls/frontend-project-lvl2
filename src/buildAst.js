@@ -7,7 +7,7 @@ const buildAst = (oldData, newData) => {
     }
     return false;
   };
-  const keysCollection = Object.keys(Object.assign({}, oldData, newData)).sort();
+  const keysCollection = Object.keys({ ...oldData, ...newData }).sort();
   const nodeCollection = keysCollection.map((key) => {
     const node = {
       name: key,
@@ -31,10 +31,7 @@ const buildAst = (oldData, newData) => {
       node.value = newData[key];
       node.beforeValue = oldData[key];
       node.status = 'changed';
-      // console.log(node);
     }
-    // console.log(node);
-// console.log('key is ======>', key, 'newData is ======> ', newData[key], 'oldData is =======>', oldData[key]);
 
     return node;
   });

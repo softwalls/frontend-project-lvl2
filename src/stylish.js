@@ -25,7 +25,7 @@ const stylish = (diff) => {
       return `${currentValue}`;
     }
 
-// recursive case: currentValue is an array of nodes.
+    // recursive case: currentValue is an array of nodes.
     const lines = currentValue.map((node) => {
       if (node.status === undefined) {
         return `${indent}  ${node.name}: ${iter(node.value, depth + 1)}`;
@@ -39,12 +39,10 @@ const stylish = (diff) => {
       if (node.status === 'added') {
         return `${indent}+ ${node.name}: ${iter(node.value, depth + 1)}`;
       }
-      if (node.status === 'changed') {
-        return [
-          `${indent}- ${node.name}: ${iter(node.beforeValue, depth + 1)}`,
-          `${indent}+ ${node.name}: ${iter(node.value, depth + 1)}`,
-        ].join('\n');
-      }
+      return [
+        `${indent}- ${node.name}: ${iter(node.beforeValue, depth + 1)}`,
+        `${indent}+ ${node.name}: ${iter(node.value, depth + 1)}`,
+      ].join('\n');
     });
     const styled = ['{', ...lines, `${bracketindent}}`].join('\n');
     return styled;
@@ -55,29 +53,3 @@ const stylish = (diff) => {
 };
 
 export default stylish;
-
-/*
- каждое поле (ключ: значение) превращаем в объект
-[
-  {
-    name: key,
-    oldValue: value,
-    value: [
-      {name, old, value},
-      {name, old, value}
-    ]
-    
-  },
-  {
-    name: key2,
-    value: ,
-    after: 1000,
-  },
-  {
-    key3: thirdValue,
-    before: null,
-    after:
-  }
-]
-
-*/
