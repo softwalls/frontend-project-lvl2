@@ -15,7 +15,6 @@ const stylish = (diff) => {
     const bracketindent = ' '.repeat((depth * 4) - 4);
     if (!Array.isArray(currentValue)) {
       if (isObject(currentValue)) {
-        console.log('!!!!!!!!!', currentValue);
         const objLines = Object
           .entries(currentValue)
           .map(([key, value]) => `${indent}  ${key}: ${iter(value, depth + 1)}`);
@@ -48,7 +47,6 @@ const stylish = (diff) => {
     return styled;
   };
   const result = iter(diff, 1);
-  // console.log(result);
   return result;
 };
 
