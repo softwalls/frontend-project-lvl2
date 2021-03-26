@@ -4,6 +4,7 @@ import path, { dirname } from 'path';
 import { parseFile } from './parsers.js';
 import buildAst from './buildAst.js';
 import stylish from './stylish.js';
+import plain from './plain.js';
 
 // eslint-disable-next-line no-underscore-dangle
 const __filename = fileURLToPath(import.meta.url);
@@ -30,7 +31,10 @@ const genDiff = (filepath1, filepath2, formatname) => {
   if (formatname === 'tree') {
     return stylish(diff);
   }
-  return diff;
+  if (formatname === 'plain') {
+    return plain(diff);
+  }
+  return 'unknown formatter';
 };
 
 // =================================================================================
