@@ -3,8 +3,7 @@ import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 import { parseFile } from './parsers.js';
 import buildAst from './buildAst.js';
-import stylish from './formatters/stylish.js';
-import plain from './formatters/plain.js';
+import format from './formatters/index.js';
 
 // eslint-disable-next-line no-underscore-dangle
 const __filename = fileURLToPath(import.meta.url);
@@ -28,15 +27,8 @@ const genDiff = (filepath1, filepath2, formatname) => {
   const file1 = parseFile(getAbcoluteFilePath(filepath1));
   const file2 = parseFile(getAbcoluteFilePath(filepath2));
   const diff = buildAst(file1, file2);
-  if (formatname === 'tree') {
-    return stylish(diff);
-  }
-  if (formatname === 'plain') {
-    return plain(diff);
-  }
-  return 'unknown formatter';
+  return format(diff, formatname);
 };
-
 // =================================================================================
 
 export {
