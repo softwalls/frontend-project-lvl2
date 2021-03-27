@@ -3,8 +3,8 @@ import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 import { parseFile } from './parsers.js';
 import buildAst from './buildAst.js';
-import stylish from './stylish.js';
-import plain from './plain.js';
+import stylish from './formatters/stylish.js';
+import plain from './formatters/plain.js';
 
 // eslint-disable-next-line no-underscore-dangle
 const __filename = fileURLToPath(import.meta.url);
