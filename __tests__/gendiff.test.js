@@ -14,6 +14,7 @@ import { genDiff } from '../src/genDiff';
 
 const pathTreeDiff = './__fixtures__/tree_diff.txt';
 const pathPlainDiff = './__fixtures__/plain.txt';
+const pathJsonDiff = './__fixtures__/treeJsonFormatDiff.txt';
 
 let treeJsonPath1;
 let treeJsonPath2;
@@ -91,5 +92,30 @@ describe('genDiff with plain', () => {
 
   test('works with different type of tree-like files', () => {
     expect(genDiff(treeJsonPath1, treeYamlPath2, 'plain')).toStrictEqual(`${readFileSync(pathPlainDiff)}`);
+  });
+});
+
+describe('genDiff with json formatter', () => {
+  beforeEach(() => {
+    // jsonPath1 = './__fixtures__/file1.json';
+    // jsonPath2 = './__fixtures__/file2.json';
+    // yamlPath1 = './__fixtures__/file1.yml';
+    // yamlPath2 = './__fixtures__/file2.yml';
+    treeJsonPath1 = './__fixtures__/tree1.json';
+    treeJsonPath2 = './__fixtures__/tree2.json';
+    treeYamlPath1 = './__fixtures__/tree1.yml';
+    treeYamlPath2 = './__fixtures__/tree2.yml';
+  });
+
+  test('works with tree-like JSON files', () => {
+    expect((genDiff(treeJsonPath1, treeJsonPath2, 'json'))).toStrictEqual(`${readFileSync(pathJsonDiff)}`);
+  });
+
+  test('works with tree-like YAML files', () => {
+    expect(genDiff(treeYamlPath1, treeYamlPath2, 'json')).toStrictEqual(`${readFileSync(pathJsonDiff)}`);
+  });
+
+  test('works with different type of tree-like files', () => {
+    expect(genDiff(treeJsonPath1, treeYamlPath2, 'json')).toStrictEqual(`${readFileSync(pathJsonDiff)}`);
   });
 });
