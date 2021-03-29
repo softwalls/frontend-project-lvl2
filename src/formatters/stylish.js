@@ -1,11 +1,4 @@
-import _ from 'lodash';
-
-const isObject = (value) => {
-  if (_.isObject(value) && !Array.isArray(value)) {
-    return true;
-  }
-  return false;
-};
+import isObject from '../isObject.js';
 
 const stylish = (diff) => {
   // console.log(diff);
@@ -23,16 +16,14 @@ const stylish = (diff) => {
       // тут уже только примитивы
       return `${currentValue}`;
     }
-
-    // recursive case: currentValue is an array of nodes.
-    const lines = currentValue.map((node) => {
-      if (node.status === undefined) {
-        return `${indent}  ${node.name}: ${iter(node.value, depth + 1)}`;
+    const generateLine = (node) => {
+      if (node.value === undefined) {
+        return `${indent}  ${node.name}: ${iter(node.children, depth + 1)}`;
       }
       if (node.status === 'untouched') {
         return `${indent}  ${node.name}: ${iter(node.value, depth + 1)}`;
       }
-      if (node.status === 'deleted') {
+      if (node.status === 'removed') {
         return `${indent}- ${node.name}: ${iter(node.value, depth + 1)}`;
       }
       if (node.status === 'added') {
@@ -42,7 +33,9 @@ const stylish = (diff) => {
         `${indent}- ${node.name}: ${iter(node.beforeValue, depth + 1)}`,
         `${indent}+ ${node.name}: ${iter(node.value, depth + 1)}`,
       ].join('\n');
-    });
+    };
+    // recursive case: currentValue is an array of nodes.
+    const lines = currentValue.map((node) => generateLine(node));
     const styled = ['{', ...lines, `${bracketindent}}`].join('\n');
     return styled;
   };

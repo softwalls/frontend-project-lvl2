@@ -2,7 +2,7 @@
   "nodes": [
     {
       "name": "common",
-      "value": [
+      "children": [
         {
           "name": "follow",
           "value": false,
@@ -16,14 +16,13 @@
         {
           "name": "setting2",
           "value": 200,
-          "beforeValue": 200,
-          "status": "deleted"
+          "status": "removed"
         },
         {
           "name": "setting3",
           "value": null,
           "beforeValue": true,
-          "status": "changed"
+          "status": "updated"
         },
         {
           "name": "setting4",
@@ -39,15 +38,15 @@
         },
         {
           "name": "setting6",
-          "value": [
+          "children": [
             {
               "name": "doge",
-              "value": [
+              "children": [
                 {
                   "name": "wow",
                   "value": "so much",
                   "beforeValue": "",
-                  "status": "changed"
+                  "status": "updated"
                 }
               ]
             },
@@ -67,12 +66,12 @@
     },
     {
       "name": "group1",
-      "value": [
+      "children": [
         {
           "name": "baz",
           "value": "bars",
           "beforeValue": "bas",
-          "status": "changed"
+          "status": "updated"
         },
         {
           "name": "foo",
@@ -85,7 +84,7 @@
           "beforeValue": {
             "key": "value"
           },
-          "status": "changed"
+          "status": "updated"
         }
       ]
     },
@@ -97,13 +96,7 @@
           "id": 45
         }
       },
-      "beforeValue": {
-        "abc": 12345,
-        "deep": {
-          "id": 45
-        }
-      },
-      "status": "deleted"
+      "status": "removed"
     },
     {
       "name": "group3",

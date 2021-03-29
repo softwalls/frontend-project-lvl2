@@ -1,39 +1,41 @@
-import _ from 'lodash';
+import isObject from './isObject.js';
+
+const getNode = (obj1, obj2, key) => {
+  const node = {};
+  if (obj1[key] === obj2[key]) {
+    node.value = obj2[key];
+    node.status = 'untouched';
+  } else if (obj1[key] === undefined) {
+    node.value = obj2[key];
+    node.status = 'added';
+  } else if (obj2[key] === undefined) {
+    node.value = obj1[key];
+    node.status = 'removed';
+  } else {
+    node.value = obj2[key];
+    node.beforeValue = obj1[key];
+    node.status = 'updated';
+  }
+  return node;
+};
 
 const buildAst = (oldData, newData) => {
-  const isObject = (value) => {
-    if (_.isObject(value) && !Array.isArray(value)) {
-      return true;
-    }
-    return false;
-  };
   const keysCollection = Object.keys({ ...oldData, ...newData }).sort();
   const nodeCollection = keysCollection.map((key) => {
     const node = {
       name: key,
     };
     if (isObject(oldData[key]) && isObject(newData[key])) {
-      node.value = buildAst(oldData[key], newData[key]);
+      node.children = buildAst(oldData[key], newData[key]);
       return node;
       // console.log('node value ======> ', node.value);
     }
-    if (oldData[key] === newData[key]) {
-      node.value = newData[key];
-      node.status = 'untouched';
-    } else if (oldData[key] === undefined) {
-      node.value = newData[key];
-      node.status = 'added';
-    } else if (newData[key] === undefined) {
-      node.value = oldData[key];
-      node.beforeValue = oldData[key];
-      node.status = 'deleted';
-    } else {
-      node.value = newData[key];
-      node.beforeValue = oldData[key];
-      node.status = 'changed';
-    }
+    const nodeBody = getNode(oldData, newData, key);
 
-    return node;
+    return {
+      ...node,
+      ...nodeBody,
+    };
   });
   // console.log(JSON.stringify(nodeCollection, null, 4));
   return nodeCollection;
