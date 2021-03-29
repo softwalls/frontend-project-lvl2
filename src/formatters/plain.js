@@ -23,7 +23,6 @@ const getLine = (node, path) => {
     return `Property '${path}' was updated. From ${getNodeValue(node, 'before')} to ${getNodeValue(node)}`;
   }
   return null;
-  console.log(path, getNodeValue(node));
 };
 
 const plain = (diff) => {
