@@ -16,23 +16,12 @@ const pathTreeDiff = './__fixtures__/tree_diff.txt';
 const pathPlainDiff = './__fixtures__/plain.txt';
 const pathJsonDiff = './__fixtures__/treeJsonFormatDiff.txt';
 
-let treeJsonPath1;
-let treeJsonPath2;
-let treeYamlPath1;
-let treeYamlPath2;
+const treeJsonPath1 = './__fixtures__/tree1.json';
+const treeJsonPath2 = './__fixtures__/tree2.json';
+const treeYamlPath1 = './__fixtures__/tree1.yml';
+const treeYamlPath2 = './__fixtures__/tree2.yml';
 
 describe('genDiff with stylish', () => {
-  beforeEach(() => {
-    // jsonPath1 = './__fixtures__/file1.json';
-    // jsonPath2 = './__fixtures__/file2.json';
-    // yamlPath1 = './__fixtures__/file1.yml';
-    // yamlPath2 = './__fixtures__/file2.yml';
-    treeJsonPath1 = './__fixtures__/tree1.json';
-    treeJsonPath2 = './__fixtures__/tree2.json';
-    treeYamlPath1 = './__fixtures__/tree1.yml';
-    treeYamlPath2 = './__fixtures__/tree2.yml';
-  });
-
   /*
 
   // ================================================================
@@ -71,17 +60,6 @@ describe('genDiff with stylish', () => {
 });
 
 describe('genDiff with plain', () => {
-  beforeEach(() => {
-    // jsonPath1 = './__fixtures__/file1.json';
-    // jsonPath2 = './__fixtures__/file2.json';
-    // yamlPath1 = './__fixtures__/file1.yml';
-    // yamlPath2 = './__fixtures__/file2.yml';
-    treeJsonPath1 = './__fixtures__/tree1.json';
-    treeJsonPath2 = './__fixtures__/tree2.json';
-    treeYamlPath1 = './__fixtures__/tree1.yml';
-    treeYamlPath2 = './__fixtures__/tree2.yml';
-  });
-
   test('works with tree-like JSON files', () => {
     expect((genDiff(treeJsonPath1, treeJsonPath2, 'plain'))).toStrictEqual(`${readFileSync(pathPlainDiff)}`);
   });
@@ -96,17 +74,6 @@ describe('genDiff with plain', () => {
 });
 
 describe('genDiff with json formatter', () => {
-  beforeEach(() => {
-    // jsonPath1 = './__fixtures__/file1.json';
-    // jsonPath2 = './__fixtures__/file2.json';
-    // yamlPath1 = './__fixtures__/file1.yml';
-    // yamlPath2 = './__fixtures__/file2.yml';
-    treeJsonPath1 = './__fixtures__/tree1.json';
-    treeJsonPath2 = './__fixtures__/tree2.json';
-    treeYamlPath1 = './__fixtures__/tree1.yml';
-    treeYamlPath2 = './__fixtures__/tree2.yml';
-  });
-
   test('works with tree-like JSON files', () => {
     expect((genDiff(treeJsonPath1, treeJsonPath2, 'json'))).toStrictEqual(`${readFileSync(pathJsonDiff)}`);
   });
