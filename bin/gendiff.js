@@ -1,10 +1,8 @@
 #!/usr/bin/env node
 
-import { Command } from 'commander';
+import program from 'commander';
 // eslint-disable-next-line import/extensions
 import genDiff from '../index.js';
-
-const program = new Command();
 
 const getFormat = () => {
   const options = program.opts();
