@@ -22,30 +22,6 @@ const treeYamlPath1 = './__fixtures__/tree1.yml';
 const treeYamlPath2 = './__fixtures__/tree2.yml';
 
 describe('genDiff with stylish', () => {
-  /*
-
-  // ================================================================
-  //                      ТЕСТЫ ДЛЯ ПЛОСКИХ ФАЙЛОВ
-  // ================================================================
-
-  test('works fine with JSON files', () => {
-    expect(genDiff(jsonPath1, jsonPath2)).toStrictEqual(`${readFileSync(pathDiff)}`);
-  });
-
-  test('works with YAML files', () => {
-    expect(genDiff(yamlPath1, yamlPath2)).toStrictEqual(`${readFileSync(pathDiff)}`);
-  });
-
-  test('works with different type of files', () => {
-    expect(genDiff(jsonPath1, yamlPath2)).toStrictEqual(`${readFileSync(pathDiff)}`);
-  });
-
-*/
-
-  // ================================================================
-  //                  ТЕСТЫ ДЛЯ ДРЕВОВИДНЫХ ФАЙЛОВ
-  // ================================================================
-
   test('works with tree-like JSON files', () => {
     expect(genDiff(treeJsonPath1, treeJsonPath2, 'tree')).toStrictEqual(`${readFileSync(pathTreeDiff)}`);
   });

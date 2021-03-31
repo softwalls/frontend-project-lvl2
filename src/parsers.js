@@ -11,13 +11,13 @@ const parseJson = (pathfile) => JSON.parse(fs.readFileSync(pathfile));
 
 const parseFile = (pathfile) => {
   const extname = path.extname(pathfile);
-  let parsed = {};
   if (extname === '.json') {
-    parsed = parseJson(pathfile);
-  } else if (extname === '.yml') {
-    parsed = parseYaml(pathfile);
+    return parseJson(pathfile);
   }
-  return parsed;
+  if (extname === '.yml') {
+    return parseYaml(pathfile);
+  }
+  return 'Unsupported file format';
 };
 
 export {

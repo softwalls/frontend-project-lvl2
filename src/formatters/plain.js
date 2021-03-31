@@ -33,9 +33,9 @@ const plain = (diff) => {
       const line = (node.children !== undefined)
         ? iter(node.children, currentPath)
         : getLine(node, currentPath);
-      acc.push(line);
+      const lineCollection = [...acc, line];
       // console.log(line);
-      return acc;
+      return lineCollection;
     }, []);
     return lines.flat(Infinity);
   };
